@@ -1,4 +1,4 @@
-# matihan-panel-api
+# panel-api
 
 ## Installation
 
