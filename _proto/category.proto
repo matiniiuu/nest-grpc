@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package category;
+
+service CategoryService {
+  rpc AddCategory       (AddCategoryQuery)  returns (Category) {}
+  rpc GetCategories     (GetCategoriesQuery)     returns (GetCategoriesResponse) {}
+}
+message File {
+  string     _id         = 1;
+  string     filename    = 2;
+  string     path        = 3;
+  string     mimetype    = 4;
+  string     status      = 5;
+}
+message Category {
+  string                      _id         = 1;
+  string                      title       = 2;
+  string                      slug        = 3;
+  File                        image       = 4;
+  optional string             parent      = 5;
+  repeated string             children    = 6;
+  repeated string             products    = 7;
+  string                      status      = 8;
+  string                      createdAt   = 9;
+  string                      updatedAt   = 10;
+  int32                       version     = 11;
+}
+
+message AddCategoryQuery {
+  string            title       = 1;
+  string            slug        = 2;
+  File              image       = 3;
+  optional string   parent      = 4;
+  repeated string   children    = 5;
+}
+
+message GetCategoryQuery {
+  string    categoryId  =   1;
+}
+
+message GetCategoriesQuery {
+  optional string    status   =   1;
+  optional string    page     =   2;
+  optional string    limit    =   3;
+}
+message GetCategoriesResponse {
+  repeated Category    result   =   1;
+  int32               count    =   2;
+}

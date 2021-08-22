@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package file;
+
+service FileService {
+  rpc AddFile       (AddFileQuery)        returns (File)                  {}
+  rpc GetFilesById  (GetFilesByIdQuery)   returns (GetFilesByIdResponse)  {}
+  rpc GetFiles      (GetFilesQuery)       returns (GetFilesResponse)      {}
+}
+
+message File {
+  string     _id         = 1;
+  string     filename    = 2;
+  string     path        = 3;
+  string     mimetype    = 4;
+  string     status      = 5;
+  string     createdAt   = 6;
+  string     updatedAt   = 7;
+  int32      version     = 8;
+}
+
+message AddFileQuery {
+  string     filename    = 1;
+  string     path        = 2;
+  string     mimetype    = 3;
+}
+
+message GetFilesByIdQuery {
+  repeated string     ids    = 1;
+}
+message GetFilesByIdResponse  {
+  repeated File     files    = 1;
+}
+
+
+message GetFilesQuery {
+  optional string    status   =   1;
+  optional string    page     =   2;
+  optional string    limit    =   3;
+}
+message GetFilesResponse {
+  repeated File       result   =   1;
+  int32               count    =   2;
+} 
